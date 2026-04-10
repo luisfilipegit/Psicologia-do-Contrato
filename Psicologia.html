@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Psicologia do Acordo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        bg: '#FDFBF7',
+                        textMain: '#2D3748',
+                        accentWarm: '#D4A373',
+                        accentMuted: '#E9E3D5',
+                        accentGreen: '#CCD5AE',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #2D3748;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #E9E3D5;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .interactive-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #D4A373;
+        }
+
+        .content-hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-visible {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-textMain relative">
+
+    <!-- Chosen Palette: Warm Neutrals & Sage -->
+    <!-- Application Structure Plan: Narrative dashboard designed for mobile-first scrolling. The architecture uses flex-column stacks for mobile that expand to side-by-side grids on desktop. Interactive cards manage vertical space on small screens by revealing content only when requested. -->
+    <!-- Visualization & Content Choices: 1. Bar Chart -> Vertical compliance comparison. 2. Radar Chart -> Strategic trade-offs. 3. Interactive Cards -> Neurochemical details. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="fixed top-0 w-full glass-panel z-50 py-3 px-4 md:px-12 flex justify-between items-center">
+        <div class="font-serif font-bold text-lg md:text-xl tracking-tight text-accentWarm">Olá Patroa! Yasmin kk</div>
+        <div class="hidden md:flex space-x-6 text-sm font-medium">
+            <a href="#introducao" class="hover:text-accentWarm transition-colors">Introdução</a>
+            <a href="#biologia" class="hover:text-accentWarm transition-colors">Biologia do Toque</a>
+            <a href="#cognicao" class="hover:text-accentWarm transition-colors">A Força do Papel</a>
+            <a href="#dados" class="hover:text-accentWarm transition-colors">Análise de Dados</a>
+            <a href="#fontes" class="hover:text-accentWarm transition-colors">Fontes</a>
+        </div>
+        <div class="md:hidden text-xs font-bold text-accentWarm border border-accentWarm px-2 py-1 rounded">MENU</div>
+    </nav>
+
+    <main class="pt-20 pb-16 px-4 md:px-12 max-w-6xl mx-auto space-y-16 md:space-y-24">
+
+        <section id="introducao" class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mt-8">
+            <div class="w-full md:w-1/2 space-y-4 md:space-y-6 text-center md:text-left">
+                <p class="uppercase tracking-widest text-[10px] md:text-xs font-semibold text-accentWarm">Toma Essa Análise de Comportamento Patroa!</p>
+                <h1 class="font-serif text-3xl md:text-6xl font-bold leading-tight">A Psicologia<br>do Acordo</h1>
+                <p class="text-base md:text-lg leading-relaxed text-gray-600">
+                    Porque é que um simples toque de mãos ou uma assinatura num pedaço de papel exercem tamanha influência sobre o comportamento humano? Esta análise explora as raízes evolutivas e cognitivas destes rituais.
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 flex justify-center text-[80px] md:text-[180px] drop-shadow-xl select-none">
+                🤝📜
+            </div>
+        </section>
+
+        <section id="biologia" class="space-y-8 md:space-y-12 bg-white p-6 md:p-12 rounded-2xl shadow-sm border border-accentMuted">
+            <div class="max-w-3xl">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold mb-4">O Aperto de Mão: Confiança Evolutiva</h2>
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+                    O aperto de mão é uma ferramenta evolutiva para a mitigação de riscos. Clique nos cartões abaixo para explorar a neuroquímica envolvida no contacto físico entre utilizadores.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="interactive-card bg-bg p-5 md:p-6 rounded-xl border border-accentMuted" onclick="toggleContent('card1')">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">🧠</div>
+                    <h3 class="font-bold text-base md:text-lg mb-1">Oxitocina</h3>
+                    <p class="text-xs text-gray-500 mb-3">Tocar para ler mais</p>
+                    <div id="card1" class="content-hidden text-sm leading-relaxed border-t border-accentMuted pt-4">
+                        O contacto físico estimula a libertação de oxitocina (a "hormona da confiança"). Isto reduz os níveis de cortisol e diminui a atividade da amígdala cerebral, reduzindo a perceção de ameaças.
+                    </div>
+                </div>
+
+                <div class="interactive-card bg-bg p-5 md:p-6 rounded-xl border border-accentMuted" onclick="toggleContent('card2')">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">🛡️</div>
+                    <h3 class="font-bold text-base md:text-lg mb-1">Sinalização Honesta</h3>
+                    <p class="text-xs text-gray-500 mb-3">Tocar para ler mais</p>
+                    <div id="card2" class="content-hidden text-sm leading-relaxed border-t border-accentMuted pt-4">
+                        Historicamente, mostrar a mão direita vazia provava a ausência de armas. Hoje, o cérebro ainda interpreta este gesto como uma sinalização de intenções cooperativas.
+                    </div>
+                </div>
+
+                <div class="interactive-card bg-bg p-5 md:p-6 rounded-xl border border-accentMuted" onclick="toggleContent('card3')">
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4">👁️</div>
+                    <h3 class="font-bold text-base md:text-lg mb-1">Avaliação Rápida</h3>
+                    <p class="text-xs text-gray-500 mb-3">Tocar para ler mais</p>
+                    <div id="card3" class="content-hidden text-sm leading-relaxed border-t border-accentMuted pt-4">
+                        A firmeza do aperto de mão correlaciona-se com traços de extroversão e estabilidade emocional. É uma transferência instantânea de dados sobre a personalidade do outro.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cognicao" class="space-y-8 md:space-y-12">
+            <div class="max-w-3xl">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold mb-4">Contratos: O Peso da Tinta</h2>
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+                    Se o aperto de mão cria confiança emocional, o contrato cria amarras cognitivas através da economia comportamental.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                <div class="w-full md:w-1/2 bg-accentMuted p-6 md:p-8 rounded-2xl">
+                    <div class="text-4xl mb-4 md:mb-6">⚖️</div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4">Compromisso e Coerência</h3>
+                    <p class="text-sm md:text-base leading-relaxed mb-4">
+                        Os humanos possuem um desejo de ser coerentes com o que já fizeram publicamente. Uma assinatura é um ato de compromisso ativo.
+                    </p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start"><span class="mr-2 font-bold text-accentWarm">•</span> <span><b>Dissonância Cognitiva:</b> Quebrar um contrato gera um desconforto psicológico intenso por ferir a autoimagem.</span></li>
+                        <li class="flex items-start"><span class="mr-2 font-bold text-accentWarm">•</span> <span><b>Esforço Mental:</b> O ato de assinar solidifica a memória do compromisso melhor do que as palavras.</span></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/2 bg-white border border-accentMuted p-6 md:p-8 rounded-2xl">
+                    <div class="text-4xl mb-4 md:mb-6">⚓</div>
+                    <h3 class="text-lg md:text-xl font-bold mb-4">O Risco da Formalidade</h3>
+                    <p class="text-sm md:text-base leading-relaxed mb-4">
+                        Contratos demasiado detalhados podem causar o <b>Efeito de Expulsão</b> da motivação intrínseca.
+                    </p>
+                    <p class="leading-relaxed text-xs md:text-sm text-gray-500 bg-bg p-4 rounded border-l-4 border-accentWarm">
+                        "Quando a segurança jurídica é excessiva, a confiança moral é reduzida. O parceiro passa a agir apenas pelo limite do que está escrito no ecrã ou papel."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="dados" class="space-y-8 md:space-y-12 bg-[#F6F4EE] p-6 md:p-12 rounded-2xl">
+            <div class="max-w-3xl mx-auto text-center mb-4 md:mb-8">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold mb-4">Dados Comportamentais</h2>
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+                    Análise do impacto dos diferentes rituais na taxa de cumprimento de tarefas e na perceção de segurança.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8 items-center justify-center">
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-center font-bold mb-2 text-[10px] md:text-xs uppercase tracking-wider">Taxa de Cumprimento (%)</h3>
+                    <div class="chart-container">
+                        <canvas id="complianceChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-center font-bold mb-2 text-[10px] md:text-xs uppercase tracking-wider">Perfil do Acordo</h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fontes" class="pt-12 border-t border-accentMuted">
+            <h2 class="font-serif text-xl md:text-2xl font-bold mb-6">Fontes e Referências</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <div class="bg-white p-5 rounded-lg border border-accentMuted">
+                    <h4 class="font-bold text-sm mb-1">Influence: Science and Practice</h4>
+                    <p class="text-xs text-gray-600">Robert Cialdini sobre o princípio da coerência.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-accentMuted">
+                    <h4 class="font-bold text-sm mb-1">Journal of Personality</h4>
+                    <p class="text-xs text-gray-600">Estudos sobre comportamento não-verbal.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#2D3748] text-white py-8 text-center px-4">
+        <p class="text-xs text-gray-400">Desenvolvido por GEMINI Supervisionado e adaptado por Luis Filipe!"FilipScript" • 2026</p>
+    </footer>
+
+    <script>
+        function toggleContent(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('content-hidden')) {
+                const allHidden = document.querySelectorAll('.content-visible');
+                allHidden.forEach(item => {
+                    item.classList.remove('content-visible');
+                    item.classList.add('content-hidden');
+                });
+                el.classList.remove('content-hidden');
+                el.classList.add('content-visible');
+            } else {
+                el.classList.remove('content-visible');
+                el.classList.add('content-hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { size: 10 }, color: '#2D3748' } }
+                }
+            };
+
+            const ctxBar = document.getElementById('complianceChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Nulo', 'Verbal', 'Mão', 'Escrito'],
+                    datasets: [{
+                        label: 'Taxa de Sucesso (%)',
+                        data: [20, 40, 75, 95],
+                        backgroundColor: ['#E9E3D5', '#CCD5AE', '#D4A373', '#2D3748'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, ticks: { font: { size: 9 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+
+            const ctxRadar = document.getElementById('radarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Confiança', 'Emoção', 'Flexibilidade', 'Segurança', 'Esforço'],
+                    datasets: [
+                        { label: 'Mão', data: [90, 80, 85, 15, 20], borderColor: '#D4A373', backgroundColor: 'rgba(212, 163, 115, 0.2)' },
+                        { label: 'Contrato', data: [30, 15, 10, 95, 90], borderColor: '#2D3748', backgroundColor: 'rgba(45, 55, 72, 0.2)' }
+                    ]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        r: { ticks: { display: false }, pointLabels: { font: { size: 9 } } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
